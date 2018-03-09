@@ -1,5 +1,5 @@
-const Koa = require('koa');
-const app = new Koa();
+const Logoran = require('logoran');
+const app = new Logoran();
 
 app.use((ctx, next) => {
   const start = new Date();
@@ -12,7 +12,7 @@ app.use((ctx, next) => {
 
 // response
 app.use(ctx => {
-  ctx.body = 'Hello Koa in app.js';
+  ctx.body = 'Hello Logoran in app.js';
 });
 
 app.listen(3000);

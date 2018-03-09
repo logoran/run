@@ -1,5 +1,5 @@
-const Koa = require('koa');
-const app = new Koa();
+const Logoran = require('logoran');
+const app = new Logoran();
 const co = require('co');
 
 app.use(co.wrap(function *(ctx, next) {
@@ -11,7 +11,7 @@ app.use(co.wrap(function *(ctx, next) {
 
 // response
 app.use(ctx => {
-  ctx.body = 'Hello Koa  in app-generator.js';
+  ctx.body = 'Hello Logoran  in app-generator.js';
 });
 
 app.listen(3000);

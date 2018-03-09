@@ -1,30 +1,30 @@
 {
-  "name": "runkoa",
-  "version": "1.5.6",
-  "description": "run koa in any flow control(context, generator, async)",
+  "name": "logoran-run",
+  "version": "1.0.0",
+  "description": "run logoran in any flow control(context, generator, async)",
   "main": "index.js",
   "scripts": {
-    "test": "RUNKOA_TEST=1 mocha -u bdd --compilers js:babel-core/register",
+    "test": "LOGORAN_RUN_TEST=1 mocha -u bdd --compilers js:babel-core/register",
     "nodemon": "cd test && ../node_modules/.bin/nodemon test.js",
     "pub": "npm publish ."
   },
   "preferGlobal": "true",
   "bin": {
-    "runkoa": "bin/runkoa.js"
+    "logoran-run": "bin/logoran-run.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/17koa/runkoa.git"
+    "url": "git+https://github.com/logoran/run.git"
   },
-  "author": "i5ting",
+  "author": ["i5ting", "leo"],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/17koa/runkoa/issues"
+    "url": "https://github.com/logoran/run/issues"
   },
   "engines": {
     "node": ">= 4"
   },
-  "homepage": "https://github.com/17koa/runkoa#readme",
+  "homepage": "https://github.com/logoran/run#readme",
   "dependencies": {
     "babel-core": "^6.7.5",
     "babel-plugin-add-module-exports": "^0.1.2",
@@ -37,7 +37,7 @@
   "devDependencies": {
     "co": "^4.6.0",
     "coffee": "^3.2.1",
-    "koa": "^2.0.0",
+    "logoran": "^1.0.1",
     "mocha": "^2.4.5",
     "nodemon": "^1.9.1",
     "request": "^2.71.0",

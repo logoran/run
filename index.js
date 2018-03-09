@@ -3,7 +3,7 @@
 require("babel-polyfill")
 
 var fs = require('fs')
-var debug = require('debug')('runkoa')
+var debug = require('debug')('logoran-run')
 var path = require('path')
 
 var is_npm_v3 = /^[3|4]/.test(require('child_process').execSync('npm -v').toString())
@@ -40,7 +40,7 @@ module.exports = function (entry, is_cli) {
   var is_exist = fs.existsSync(f)
 
   if (is_exist === false) {
-    return console.error('runkoa entry file is not exist, please check it');
+    return console.error('logoran-run entry file is not exist, please check it');
   }
 
   require(f) // this is es7 - gets transpile
@@ -59,11 +59,11 @@ function get_dirname_in_node_modules(){
 }
 
 function get_dirname_in_parent(){
-  var dir =  __dirname.replace('runkoa', '')
+  var dir =  __dirname.replace('logoran-run', '')
   var plugin_base = 'babel-plugin-'
 
-  if(is_npm_v3 === true && process.env.RUNKOA_TEST){
-    dir = path.resolve(dir, 'runkoa/node_modules/')
+  if(is_npm_v3 === true && process.env.LOGORAN_RUN_TEST){
+    dir = path.resolve(dir, 'logoran-run/node_modules/')
   }
 
   debug('2babel presets path = ' + dir)

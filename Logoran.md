@@ -1,13 +1,13 @@
-# Koa 2入门
+# Logoran入门
 
-koa2已发布了一段时间，可以考虑入手，参见[Node.js最新Web技术栈（2016年4月）](https://cnodejs.org/topic/56fdf66ec5f5b4a959e91771)
+koa已发布了一段时间，可以考虑入手，参见[Node.js最新Web技术栈（2016年4月）](https://cnodejs.org/topic/56fdf66ec5f5b4a959e91771)
 
 
-本文主要是[koa 2的文档](https://github.com/koajs/koa/blob/v2.x/Readme.md)解读和[runkoa](https://github.com/17koa/runkoa)介绍，让大家对koa 2有一个更简单直接的理解
+本文主要是[koa的文档](https://github.com/koajs/koa/blob/v2.x/Readme.md)解读和[logoran-run](https://github.com/logoran/run)介绍，让大家对koa\logoran有一个更简单直接的理解
 
 ## 依赖Node.js 4.0+
 
-Koa requires node v4.0.0 or higher for (partial) ES2015 support.
+Logoran requires node v4.0.0 or higher for (partial) ES2015 support.
 
 部分特性需要ES2015,大家可以自己比对一下es6在node不同版本里的支持特性
 
@@ -16,14 +16,14 @@ http://kangax.github.io/compat-table/es6/
 ## hello world
 
 ```
-const Koa = require('koa');
-const app = new Koa();
+const Logoran = require('logoran');
+const app = new Logoran();
 
 // 此处开始堆叠各种中间件
 //...
 
 app.use(ctx => {
-  ctx.body = 'Hello Koa';
+  ctx.body = 'Hello Logoran';
 });
 
 app.listen(3000);
@@ -33,7 +33,7 @@ app.listen(3000);
 
 ## 中间件：Middleware
 
-Koa 是一个 middleware framework, 它提供了 3 种不同类型的中间件写法
+Logoran 是一个 middleware framework, 它提供了 3 种不同类型的中间件写法
 
 - common function
 - async function（新增）
@@ -50,8 +50,8 @@ node sdk就支持的，就是最常见的
 app.js
 
 ```
-const Koa = require('koa');
-const app = new Koa();
+const Logoran = require('logoran');
+const app = new Logoran();
 
 app.use((ctx, next) => {
   const start = new Date();
@@ -64,7 +64,7 @@ app.use((ctx, next) => {
 
 // response
 app.use(ctx => {
-  ctx.body = 'Hello Koa in app.js';
+  ctx.body = 'Hello Logoran in app.js';
 });
 
 app.listen(3000);
@@ -77,8 +77,8 @@ async/await是异步流程控制更好的解决方案，很多潮人都已经玩
 app-async.js
 
 ```
-const Koa = require('koa');
-const app = new Koa();
+const Logoran = require('logoran');
+const app = new Logoran();
 
 app.use(async (ctx, next) => {
   const start = new Date();
@@ -89,7 +89,7 @@ app.use(async (ctx, next) => {
 
 // response
 app.use(ctx => {
-  ctx.body = 'Hello Koa in app-async.js';
+  ctx.body = 'Hello Logoran in app-async.js';
 });
 
 app.listen(3000);
@@ -104,8 +104,8 @@ Generator是node 4（严格是0.12）开始支持的es6特性里的非常重要�
 app-generator.js
 
 ```
-const Koa = require('koa');
-const app = new Koa();
+const Logoran = require('logoran');
+const app = new Logoran();
 const co = require('co');
 
 app.use(co.wrap(function *(ctx, next) {
@@ -117,7 +117,7 @@ app.use(co.wrap(function *(ctx, next) {
 
 // response
 app.use(ctx => {
-  ctx.body = 'Hello Koa  in app-generator.js';
+  ctx.body = 'Hello Logoran  in app-generator.js';
 });
 
 app.listen(3000);
@@ -128,32 +128,26 @@ app.listen(3000);
 启动执行
 
 ```
-npm i -g runkoa
+npm i -g logoran-run
 
-runkoa app.js
-runkoa app-async.js     
-runkoa app-generator.js 
+logoran-run app.js
+logoran-run app-async.js     
+logoran-run app-generator.js 
 ```
 
 测试发起 http 请求
 
 ```
 $ curl http://127.0.0.1:3000
-Hello Koa in app.js
+Hello Logoran in app.js
 ```
-
-## v3将移除单纯的以generator作为中间件的写法
-
-    Old signature middleware (v1.x) support will be removed in v3
-
-实际是koa核心包含了一个叫koa-convert的模块，它里面warning说，以generator作为中间件的写法将在koa@3里不支持
 
 但是用co或koa-convert转过的还是可以的，本文的3种写法都是长期支持的
 
 这样写不行。。。。
 
 ```
-// Koa will convert
+// Logoran will convert
 app.use(function *(next) {
   const start = new Date();
   yield next;
@@ -179,12 +173,12 @@ app.use(convert(function *(next) {
 
 我本人比较讨厌写babel，对于node sdk不支持的特性持观望态度，比如async/await这样的神器是可以用的，其他的是不一定一定要上的，那就观望好了
 
-如果在koa 2里用到async/await就需要babel支持了
+如果在Logoran里用到async/await就需要babel支持了
 
 - es2015-node5（nodejs 5.x里支持的es6特性）
 - stage-3（包含async/await）
 
-可是，我还是不想用，就几行代码能搞定的事儿，我不想看到babel出现在我的代码里，于是就有了前面用到的runkoa，它的原理也是这样的，不过看起来更clean一些
+可是，我还是不想用，就几行代码能搞定的事儿，我不想看到babel出现在我的代码里，于是就有了前面用到的logoran-run，它的原理也是这样的，不过看起来更clean一些
 
 ## 总结
 
@@ -192,4 +186,4 @@ Node.js 4.x和5.x支持的es特性还是有很大差异的，如果不用到，�
 
     Node.js sdk迟迟不更新很讨厌,babel更新太快也很讨厌
 
-但是，无论从性能，还是流程控制上，koa 2和它的后宫（中间件）都是非常好的解决方案
+但是，无论从性能，还是流程控制上，logoran和它的后宫（中间件）都是非常好的解决方案

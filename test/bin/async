@@ -1,9 +1,9 @@
-const Koa = require('koa');
-const app = new Koa();
+const Logoran = require('logoran');
+const app = new Logoran();
 
 // response
 app.use(async (ctx, next) => {
-  ctx.body = 'Hello Koa in app.js';
+  ctx.body = 'Hello Logoran in app.js';
 });
 
 app.listen(3000);
